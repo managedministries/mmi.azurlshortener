@@ -9,7 +9,7 @@ var customAdminDomain = builder.AddParameter("CustomAdminDomain");
 var defaultRedirectUrl = builder.AddParameter("DefaultRedirectUrl");
 
 // Secret for API keys
-var apiKeys = builder.AddParameter("ApiKeys", secret: true);
+var apiKeys = builder.AddParameter("ApiKeys");
 
 var urlStorage = builder.AddAzureStorage("url-data");
 
