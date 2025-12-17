@@ -29,14 +29,12 @@ public class AzStrorageTablesService(TableServiceClient client) : IAzStrorageTab
         //Get current ID
         TableClient tblUrls = GetUrlsTable();
         NextId entity;
-
-        var check = await tblUrls.GetEntityIfExistsAsync<NextId>("1", "KEY");
-        if (check.HasValue)
+        try
         {
             var result = await tblUrls.GetEntityAsync<NextId>("1", "KEY");
-            entity = result.Value as NextId;
+            entity = result.Value;
         }
-        else
+        catch (RequestFailedException ex) when (ex.Status == 404)
         {
             entity = new NextId
             {
@@ -45,7 +43,6 @@ public class AzStrorageTablesService(TableServiceClient client) : IAzStrorageTab
                 Id = 1024
             };
         }
-
         entity.Id++;
 
         //Update

@@ -72,7 +72,8 @@ public static class ShortenerEnpoints
         try
         {
             var urlServices = new UrlServices(logger, new AzStrorageTablesService(tblClient));
-            var host = GetHost(context);
+            // Remove "api." from host if present
+            var host = GetHost(context).Replace("api.","");
             ShortResponse result = await urlServices.Create(request, host);
             return TypedResults.Created($"/api/UrlCreate/{result.ShortUrl}", result);
         }

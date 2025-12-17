@@ -8,6 +8,12 @@
       "CustomDomain": {
         "value": "${AZURE_CUSTOM_DOMAIN}"
       },
+	  "CustomApiDomain": {
+        "value": "${AZURE_CUSTOM_API_DOMAIN}"
+      },
+	  "CustomAdminDomain": {
+        "value": "${AZURE_CUSTOM_ADMIN_DOMAIN}"
+      },
       "DefaultRedirectUrl": {
         "value": "${AZURE_DEFAULT_REDIRECT_URL}"
       },
