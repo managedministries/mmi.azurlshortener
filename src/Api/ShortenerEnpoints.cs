@@ -11,12 +11,14 @@ public static class ShortenerEnpoints
     public static void MapShortenerEnpoints(this IEndpointRouteBuilder app)
     {
         var endpoints = app.MapGroup("api")
-                .WithOpenApi();
+                .WithOpenApi()
+                .RequireAuthorization();   // default: protect everything in /api
 
         // GETS
 
         endpoints.MapGet("/", GetWelcomeMessage)
-            .WithDescription("Welcome to Cloud5mins URL Shortener API");
+            .AllowAnonymous()
+            .WithDescription("Welcome to MMI URL Shortener API");
 
         endpoints.MapGet("/UrlList", UrlList)
             .WithDescription("List all Urls")
@@ -53,7 +55,7 @@ public static class ShortenerEnpoints
 
     static private string GetWelcomeMessage()
     {
-        return "Welcome to Cloud5mins URL Shortener API";
+        return "Welcome to MMI URL Shortener API";
     }
 
     static private async Task<Results<
