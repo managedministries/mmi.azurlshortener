@@ -109,8 +109,8 @@ public class AzStrorageTablesService(TableServiceClient client) : IAzStrorageTab
     {
         var tblUrls = GetUrlsTable();
         ShortUrlEntity shortUrlEntity = null;
-
-        var result = tblUrls.QueryAsync<ShortUrlEntity>(e => e.RowKey == vanity);
+        var partitionKey = vanity.Substring(1);
+        var result = tblUrls.QueryAsync<ShortUrlEntity>(e => e.PartitionKey == partitionKey && e.RowKey == vanity, 1);
         await foreach (var entity in result)
         {
             shortUrlEntity = entity;
